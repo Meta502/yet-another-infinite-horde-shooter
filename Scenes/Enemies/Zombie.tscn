@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://dorhecs72jsyk"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/Zombie.gd" id="1_mvuqx"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ov37o"]
+radius = 10.0
+height = 20.0
+
+[sub_resource type="Curve" id="Curve_2lp7e"]
+_data = [Vector2(0.620879, 0.923077), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_hkdmc"]
+curve_y = SubResource("Curve_2lp7e")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tpb18"]
+radius = 14.1421
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5lhw"]
+
+[node name="Zombie" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_mvuqx")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+mesh = SubResource("SphereMesh_ov37o")
+texture = SubResource("CurveXYZTexture_hkdmc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tpb18")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_n5lhw")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

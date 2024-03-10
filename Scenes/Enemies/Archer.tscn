@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://delkdt527u7ex"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/Archer.gd" id="1_5mhhg"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_kyo1v"]
+radius = 10.0
+height = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tpb18"]
+radius = 14.1421
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5lhw"]
+
+[node name="Archer" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_5mhhg")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+mesh = SubResource("SphereMesh_kyo1v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tpb18")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_n5lhw")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="DirectionTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]

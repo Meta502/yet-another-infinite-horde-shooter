@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://x1wub2leudx0"]
+
+[ext_resource type="Script" path="res://Scenes/Character/PlayerCamera.gd" id="1_ff8x7"]
+[ext_resource type="PackedScene" uid="uid://cjmeh8swakna3" path="res://Scenes/HUD/hud.tscn" id="2_rpt31"]
+
+[node name="Camera2D" type="Camera2D"]
+limit_left = -1980
+limit_top = -1980
+limit_right = 1980
+limit_bottom = 1980
+position_smoothing_speed = 10.0
+script = ExtResource("1_ff8x7")
+
+[node name="HUD" parent="." instance=ExtResource("2_rpt31")]
