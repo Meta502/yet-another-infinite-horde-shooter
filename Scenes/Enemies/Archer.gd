@@ -36,6 +36,7 @@ func _physics_process(delta):
 		move_and_slide()
 	else:
 		$AnimatedSprite2D.stop()
+		$AnimatedSprite2D.self_modulate = Color("#be7600")
 		die()
 		
 func die():
@@ -63,7 +64,7 @@ func _on_direction_timer_timeout():
 	$DirectionTimer.start()
 
 func _on_attack_timer_timeout():
-	if health > 0:
+	if health > 0 and (player.position - position).length() < 800:
 		var dir = (player.position + player.velocity * rng.randf_range(0, 0.5)) - position
 		var bullet = bullet_scene.instantiate()
 		

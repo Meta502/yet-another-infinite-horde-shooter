@@ -6,6 +6,7 @@ var direction: Vector2
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	position += speed * direction * delta
+	rotation_degrees += 1 * delta
 
 func _on_timer_timeout():
 	queue_free()

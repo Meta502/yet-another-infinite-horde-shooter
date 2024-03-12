@@ -12,7 +12,7 @@ var item_tables = [
 		"sprite": preload("res://Resources/NinjaAdventure/Items/Potion/LifePot.png"),
 		"display_name": "Life Potion",
 		"description": "Increases your max health",
-		"weight": 10
+		"weight": 20
 	},
 	{
 		"id": "medkit",
@@ -26,14 +26,15 @@ var item_tables = [
 		"sprite": preload("res://Resources/VladPennWeaponPack/Shotgun.png"),
 		"display_name": "Shotgun",
 		"description": "Adds additional projectiles to attack",
-		"weight": 10
-	}
-	#{
-		#"id": "running_shoes",
-		#"display_name": "Running Shoes",
-		#"description": "Increases movement speed",
-		#"weight": 20,
-	#},
+		"weight": 20
+	},
+	{
+		"id": "speed_up",
+		"sprite": preload("res://Resources/NinjaAdventure/Items/Scroll/ScrollThunder.png"),
+		"display_name": "Scroll of Speed",
+		"description": "Increases movement speed",
+		"weight": 40,
+	},
 	#{
 		#"id": "machine_gun",
 		#"display_name": "Machine Gun",
@@ -81,3 +82,5 @@ func _on_pickup_item(id):
 	elif id == "shotgun":
 		if main.projectiles < 10:
 			main.projectiles += 1
+	elif id == "speed_up" and main.movement_speed < 450:
+		main.movement_speed *= 1.01

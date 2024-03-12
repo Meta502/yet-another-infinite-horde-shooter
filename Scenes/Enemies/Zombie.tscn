@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dorhecs72jsyk"]
+[gd_scene load_steps=14 format=3 uid="uid://dorhecs72jsyk"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Zombie.gd" id="1_mvuqx"]
 [ext_resource type="Texture2D" uid="uid://dmjfbcgkee8mn" path="res://Resources/NinjaAdventure/Actor/Monsters/Cyclope2/SpriteSheet.png" id="2_qjimn"]
+[ext_resource type="AudioStream" uid="uid://dfmfl05ie8puk" path="res://Resources/NinjaAdventure/Sounds/Game/Explosion.wav" id="3_bhmd5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gg4sq"]
 atlas = ExtResource("2_qjimn")
@@ -87,6 +88,10 @@ shape = SubResource("RectangleShape2D_n5lhw")
 
 [node name="DespawnTimer" type="Timer" parent="."]
 wait_time = 2.0
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_bhmd5")
+volume_db = -10.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

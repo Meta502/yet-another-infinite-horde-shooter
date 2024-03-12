@@ -9,6 +9,7 @@ signal hit_player
 var health: int
 var speed: int = 125
 var direction: Vector2 
+var sound_played = false
 
 func _ready():
 	health = 1
@@ -28,6 +29,9 @@ func _physics_process(delta):
 func die():
 	$Area2D/CollisionShape2D.set_deferred("disabled", true)
 	$AnimatedSprite2D.self_modulate = Color("#be7600")
+	if not $Death.playing and not sound_played:
+		sound_played = true
+		$Death.play()
 	if $DespawnTimer.is_stopped():
 		$DespawnTimer.start()
 

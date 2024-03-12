@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjmeh8swakna3"]
+[gd_scene load_steps=5 format=3 uid="uid://cjmeh8swakna3"]
 
 [ext_resource type="Texture2D" uid="uid://5jy1w3xi2lmi" path="res://Resources/NinjaAdventure/HUD/Heart.png" id="1_2pgdy"]
 [ext_resource type="Script" path="res://Scenes/HUD/hud.gd" id="1_ncu8d"]
@@ -7,13 +7,6 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_hf7eb"]
 atlas = ExtResource("1_2pgdy")
 region = Rect2(0, 0, 16.4872, 15.6173)
-
-[sub_resource type="InputEventKey" id="InputEventKey_j0krp"]
-device = -1
-keycode = 4194309
-
-[sub_resource type="Shortcut" id="Shortcut_83a3d"]
-events = [SubResource("InputEventKey_j0krp")]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ncu8d")
@@ -119,8 +112,5 @@ offset_bottom = 800.0
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_6t18r")
 theme_override_font_sizes/font_size = 32
-shortcut = SubResource("Shortcut_83a3d")
 text = "Press   ENTER   to   PLAY   again"
 flat = true
-
-[connection signal="pressed" from="DeathScreen/CenterContainer/Button" to="." method="_on_button_pressed"]

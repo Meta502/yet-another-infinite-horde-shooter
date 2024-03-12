@@ -25,9 +25,14 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if body.name == "CharacterController":
+		$Sprite.queue_free()
+		$CollisionShape2D.queue_free()
 		pickup_item.emit(id)
+		$AudioStreamPlayer2D.play()
+		
+		await $AudioStreamPlayer2D.finished
 		queue_free()
 
-
 func _on_flash_timer_timeout():
-	$Sprite.visible = !$Sprite.visible
+	if $Sprite:
+		$Sprite.visible = !$Sprite.visible

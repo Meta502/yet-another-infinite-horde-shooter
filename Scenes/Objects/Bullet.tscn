@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ea0s5e81b0dp"]
+[gd_scene load_steps=9 format=3 uid="uid://ea0s5e81b0dp"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Bullet.gd" id="1_0aatn"]
+[ext_resource type="Texture2D" uid="uid://bwvwdj1ax8vh5" path="res://Resources/bullet.png" id="2_h2lfq"]
+[ext_resource type="Texture2D" uid="uid://vwdgfj51w6mn" path="res://Resources/2d_lights_and_shadows_neutral_point_light.webp" id="3_g15tl"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_4xut5"]
 radius = 5.0
@@ -28,8 +30,12 @@ collision_mask = 5
 script = ExtResource("1_0aatn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.499999, 0.5)
+scale = Vector2(0.120192, 0.120192)
+texture = ExtResource("2_h2lfq")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+visible = false
 mesh = SubResource("SphereMesh_4xut5")
 texture = SubResource("CurveXYZTexture_68kk7")
 
@@ -39,6 +45,11 @@ shape = SubResource("CircleShape2D_xevb2")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.870588, 0.470588, 0.231373, 1)
+energy = 0.08
+texture = ExtResource("3_g15tl")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

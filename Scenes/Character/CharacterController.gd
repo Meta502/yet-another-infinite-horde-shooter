@@ -38,6 +38,7 @@ func handle_input():
 			shoot.emit(position, dir.rotated(bullet)) 
 				
 		can_shoot = false
+		$ShootSFX.play()
 		$ShotTimer.start()
 
 func handle_movement(delta):

@@ -2,11 +2,15 @@ extends Node2D
 
 @export var MAX_ENEMIES = 20
 
+signal player_died
+
 var difficulty = 1
 var time_elapsed: float = 0
 
 var zombie_scene := preload("res://Scenes/Enemies/Zombie.tscn")
 var archer_scene := preload("res://Scenes/Enemies/Archer.tscn")
+
+var alive = true
 
 var lives: int
 var max_lives = 0
@@ -36,7 +40,7 @@ func _ready():
 	lives = 3
 	movement_speed = 300
 	max_lives = 3
-	$Camera2D/HUD/Health/Label.text = str(lives) + "/" + str(max_lives)
+	$Camera2D/HUD/GameHUD/Health/Label.text = str(lives) + "/" + str(max_lives)
 	weights_acc.resize(spawn_pool.size())
 	var weights_sum := 0.0
 	for i in weights_acc.size():
@@ -46,15 +50,18 @@ func _ready():
 func _physics_process(delta):
 	MAX_ENEMIES = (difficulty + 1) * 3
 	
-	$Camera2D/HUD/Health/Label.text = str(lives) + "/" + str(max_lives)
-	$Camera2D/HUD/Level/Label2.text = "Level: " + str(difficulty)
-	$Camera2D/HUD/Time/Label.text = "%.2fs" % time_elapsed
+	$Camera2D/HUD/GameHUD/Health/Label.text = str(lives) + "/" + str(max_lives)
+	$Camera2D/HUD/GameHUD/Level/Label2.text = "Level: " + str(difficulty)
+	$Camera2D/HUD/GameHUD/Time/Label.text = "%.2fs" % time_elapsed
 	
 	if $CharacterController.alive:
 		time_elapsed += delta
 		if lives == 0:
+			alive = false
 			$CharacterController.alive = false
 			$CharacterController/SpriteWrapper/AnimatedSprite2D.play("death")
+			$Camera2D/HUD.time_elapsed = time_elapsed
+			player_died.emit()
 
 func _on_difficulty_timer_timeout():
 	difficulty += 1

@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bui5fyhm1qisu"]
+[gd_scene load_steps=13 format=3 uid="uid://bui5fyhm1qisu"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Arrow.gd" id="1_b3ww0"]
+[ext_resource type="Texture2D" uid="uid://vqgdske6age5" path="res://Resources/projectile_1.png" id="2_rqavm"]
+[ext_resource type="Texture2D" uid="uid://vwdgfj51w6mn" path="res://Resources/2d_lights_and_shadows_neutral_point_light.webp" id="3_10mbt"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_70p5j"]
 radius = 5.0
@@ -13,11 +15,49 @@ point_count = 1
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_pnomx"]
 curve_x = SubResource("Curve_t4od5")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xevb2"]
-radius = 5.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_visfo"]
+radius = 4.0
+height = 10.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pts2"]
+atlas = ExtResource("2_rqavm")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fi67j"]
+atlas = ExtResource("2_rqavm")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tw3qo"]
+atlas = ExtResource("2_rqavm")
+region = Rect2(0, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayg7v"]
+atlas = ExtResource("2_rqavm")
+region = Rect2(96, 96, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_indgl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pts2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fi67j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tw3qo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayg7v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="Arrow" type="Area2D"]
 z_index = 2
+scale = Vector2(3.5, 3.5)
 collision_layer = 40
 collision_mask = 34
 script = ExtResource("1_b3ww0")
@@ -25,15 +65,28 @@ script = ExtResource("1_b3ww0")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+visible = false
 mesh = SubResource("SphereMesh_70p5j")
 texture = SubResource("CurveXYZTexture_pnomx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_xevb2")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_visfo")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 15.0
 autostart = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.68221e-07, -8.9407e-08)
+scale = Vector2(0.104167, 0.104167)
+sprite_frames = SubResource("SpriteFrames_indgl")
+frame_progress = 0.585885
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.952941, 0, 0.0470588, 1)
+energy = 0.08
+texture = ExtResource("3_10mbt")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
