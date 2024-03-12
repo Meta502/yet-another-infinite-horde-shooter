@@ -13,10 +13,19 @@ signal hit_p
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_parent().get_node("CharacterController") 
-	spawn_enemies()
 	
 func hit():
 	hit_p.emit()
+
+func choice_binary(weights_acc: Array, rng: RandomNumberGenerator) -> int:
+	var weight_threshold := rng.randf_range(0.0, weights_acc.back())
+	return weights_acc.bsearch(weight_threshold)
+
+func choose_enemy():
+	var i = choice_binary(main.weights_acc, rng)
+	var enemy = main.spawn_pool[i]
+	
+	return enemy
 
 func spawn_enemies():
 	var enemies = get_tree().get_nodes_in_group("enemies")
@@ -25,7 +34,7 @@ func spawn_enemies():
 		var amount_of_enemies = get_parent().MAX_ENEMIES - enemies.size()
 		
 		for i in range(min(amount_of_enemies, main.difficulty * 4)):
-			var enemy = main.spawn_pool[rng.randi() % main.spawn_pool.size()]["scene"]
+			var enemy = choose_enemy()["scene"]
 			
 			var _distance = rng.randf_range(800, 1200)
 			var _angle = rng.randf_range(0, 360)

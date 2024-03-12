@@ -64,7 +64,7 @@ script = ExtResource("1_mvuqx")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_1sm8j")
-frame_progress = 0.027641
+frame_progress = 0.0130121
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 visible = false
@@ -72,16 +72,13 @@ mesh = SubResource("SphereMesh_ov37o")
 texture = SubResource("CurveXYZTexture_hkdmc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_tpb18")
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_n5lhw")
 

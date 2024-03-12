@@ -1,12 +1,11 @@
 extends CharacterBody2D
 
+@onready var main = get_node("/root/MainScene")
+
 signal shoot
 
-const SPEED = 400.0
-const ACCELERATION = 8000.0
-var FRICTION = 0.75
-
-const JUMP_VELOCITY = -400.0
+const ACCELERATION = 12000.0
+var FRICTION = 0.9
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -29,7 +28,15 @@ func _ready():
 func handle_input():
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and can_shoot:
 		var dir = get_global_mouse_position() - position
-		shoot.emit(position, dir)
+		var bullet_array = [0]
+		for i in range(main.projectiles):
+			if i > 0:
+				bullet_array.insert(0, deg_to_rad(i * -2.5))
+				bullet_array.append(deg_to_rad(i * 2.5))
+		
+		for bullet in bullet_array:
+			shoot.emit(position, dir.rotated(bullet)) 
+				
 		can_shoot = false
 		$ShotTimer.start()
 
@@ -46,18 +53,19 @@ func handle_movement(delta):
 
 	var mouse_delta = mouse.normalized()
 
+	if mouse_delta.x > 0:
+		$SpriteWrapper/AnimatedSprite2D.scale.x = sprite_scale.x
+	elif mouse_delta.x < 0:
+		$SpriteWrapper/AnimatedSprite2D.scale.x = -sprite_scale.x
+
 	if int(velocity.length()) > 0:
 		$SpriteWrapper/AnimatedSprite2D.play("walk")
-		if mouse_delta.x > 0:
-			$SpriteWrapper/AnimatedSprite2D.scale.x = sprite_scale.x
-		elif mouse_delta.x < 0:
-			$SpriteWrapper/AnimatedSprite2D.scale.x = -sprite_scale.x
 	elif spawned:
 		$SpriteWrapper/AnimatedSprite2D.play("idle")
 
 	var direction = Vector2(horizontal_direction, vertical_direction).normalized()
 	var strafe_accel = ACCELERATION
-	var speed_limit = SPEED
+	var speed_limit = main.movement_speed
 
 	var current_speed = direction.dot(velocity)
 	var accel = strafe_accel * delta

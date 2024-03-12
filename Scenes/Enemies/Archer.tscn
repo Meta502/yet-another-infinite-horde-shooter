@@ -1,22 +1,66 @@
-[gd_scene load_steps=5 format=3 uid="uid://delkdt527u7ex"]
+[gd_scene load_steps=11 format=3 uid="uid://delkdt527u7ex"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Archer.gd" id="1_5mhhg"]
+[ext_resource type="Texture2D" uid="uid://chka1qov222s4" path="res://Resources/NinjaAdventure/Actor/Monsters/Spirit2/SpriteSheet.png" id="2_gt0kh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vatt7"]
+atlas = ExtResource("2_gt0kh")
+region = Rect2(0, 0, 16, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p76at"]
+atlas = ExtResource("2_gt0kh")
+region = Rect2(0, 16, 16, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7f4qq"]
+atlas = ExtResource("2_gt0kh")
+region = Rect2(0, 32, 16, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gd60q"]
+atlas = ExtResource("2_gt0kh")
+region = Rect2(0, 48, 16, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3ck86"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vatt7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p76at")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7f4qq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gd60q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="SphereMesh" id="SphereMesh_kyo1v"]
 radius = 10.0
 height = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tpb18"]
-radius = 14.1421
+radius = 28.0179
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n5lhw"]
+size = Vector2(30, 40)
 
 [node name="Archer" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_5mhhg")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_3ck86")
+frame_progress = 0.194066
+
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+visible = false
 mesh = SubResource("SphereMesh_kyo1v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -30,7 +74,7 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_n5lhw")
 
 [node name="DespawnTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 0.5
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 3.0

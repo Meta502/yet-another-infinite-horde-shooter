@@ -230,12 +230,12 @@ animations = [{
 }],
 "loop": false,
 "name": &"walk",
-"speed": 8.0
+"speed": 12.0
 }]
 
 [node name="CharacterController" type="CharacterBody2D"]
 collision_layer = 130
-collision_mask = 241
+collision_mask = 177
 script = ExtResource("1_ydaga")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -248,7 +248,7 @@ shape = SubResource("CapsuleShape2D_ereax")
 texture_filter = 1
 scale = Vector2(2.55769, 2.55769)
 sprite_frames = SubResource("SpriteFrames_ufwqp")
-animation = &"walk"
+animation = &"death"
 
 [node name="ShotTimer" type="Timer" parent="."]
 

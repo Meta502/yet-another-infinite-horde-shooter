@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://8vywvuxdwfls"]
+[gd_scene load_steps=17 format=3 uid="uid://8vywvuxdwfls"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/MainScene.gd" id="1_k2c1c"]
 [ext_resource type="PackedScene" uid="uid://bdcunhkivqmtg" path="res://Scenes/Character/CharacterController.tscn" id="1_u5s8w"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://u0o6viy6cwqu" path="res://Resources/PixelArtTopDownBasic/TX Tileset Stone Ground.png" id="3_rt1s5"]
 [ext_resource type="Texture2D" uid="uid://eybd12h1316d" path="res://Resources/PixelArtTopDownBasic/TX Struct.png" id="4_f3muw"]
 [ext_resource type="Script" path="res://Scenes/Levels/BulletManager.gd" id="4_ucmxm"]
+[ext_resource type="Script" path="res://Scenes/Managers/ItemManager.gd" id="4_ve6pu"]
 [ext_resource type="PackedScene" uid="uid://ea0s5e81b0dp" path="res://Scenes/Objects/Bullet.tscn" id="5_0n2fo"]
 [ext_resource type="PackedScene" uid="uid://x1wub2leudx0" path="res://Scenes/Character/LevelCamera.tscn" id="5_bs16p"]
 [ext_resource type="Texture2D" uid="uid://bnn4j17w5g6is" path="res://Resources/PixelArtTopDownBasic/TX Tileset Wall.png" id="5_u4kjp"]
@@ -285,6 +286,9 @@ script = ExtResource("1_k2c1c")
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource("4_ucmxm")
 bullet_scene = ExtResource("5_0n2fo")
+
+[node name="ItemManager" type="Node2D" parent="."]
+script = ExtResource("4_ve6pu")
 
 [node name="CharacterController" parent="." instance=ExtResource("1_u5s8w")]
 z_index = 1

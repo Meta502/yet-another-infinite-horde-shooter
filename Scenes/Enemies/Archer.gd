@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var player = get_node("/root/MainScene/CharacterController")
 @onready var main = get_node("/root/MainScene")
+@onready var item_manager = get_node("/root/MainScene/ItemManager")
 
 var bullet_scene = preload("res://Scenes/Objects/Arrow.tscn")
 
@@ -23,6 +24,7 @@ func _ready():
 
 	$DirectionTimer.wait_time = rng.randf_range(3, 5)
 	$DirectionTimer.start()
+	$AnimatedSprite2D.play("default")
 	health = 1
 
 func _physics_process(delta):
@@ -33,6 +35,7 @@ func _physics_process(delta):
 		velocity = direction * speed
 		move_and_slide()
 	else:
+		$AnimatedSprite2D.stop()
 		die()
 		
 func die():
@@ -48,6 +51,10 @@ func _on_area_2d_body_entered(body):
 	hit_player.emit()
 
 func _on_despawn_timer_timeout():
+	var random_float = randf()
+	
+	if random_float > 0.8:
+		item_manager.drop_random_item(position)
 	queue_free()
 
 func _on_direction_timer_timeout():
@@ -57,7 +64,7 @@ func _on_direction_timer_timeout():
 
 func _on_attack_timer_timeout():
 	if health > 0:
-		var dir = (player.position + player.velocity * 1/90) - position
+		var dir = (player.position + player.velocity * rng.randf_range(0, 0.5)) - position
 		var bullet = bullet_scene.instantiate()
 		
 		main.add_child(bullet)

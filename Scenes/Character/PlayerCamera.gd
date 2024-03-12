@@ -2,7 +2,7 @@ extends Camera2D
 
 @onready var player = get_parent().get_node("CharacterController")
 var camera_position: Vector2
-var overshoot: Vector2 = Vector2(1, 1)
+var overshoot: Vector2 = Vector2(0.1, 0.1)
 
 static func lerp_overshoot(origin: float, target: float, weight: float, overshoot: float) -> float:
 	var distance: float = (target - origin) * weight;

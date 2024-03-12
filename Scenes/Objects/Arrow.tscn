@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bui5fyhm1qisu"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Arrow.gd" id="1_b3ww0"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_70p5j"]
+radius = 5.0
+height = 10.0
+
+[sub_resource type="Curve" id="Curve_t4od5"]
+_data = [Vector2(0.549451, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_pnomx"]
+curve_x = SubResource("Curve_t4od5")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xevb2"]
+radius = 5.0
+
+[node name="Arrow" type="Area2D"]
+z_index = 2
+collision_layer = 40
+collision_mask = 34
+script = ExtResource("1_b3ww0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+mesh = SubResource("SphereMesh_70p5j")
+texture = SubResource("CurveXYZTexture_pnomx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xevb2")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
