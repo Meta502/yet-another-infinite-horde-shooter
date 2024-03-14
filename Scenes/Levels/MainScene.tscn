@@ -31,7 +31,7 @@ wait_time = 30.0
 autostart = true
 
 [node name="SpawnTimer" type="Timer" parent="EventTimers"]
-wait_time = 7.5
+wait_time = 5.0
 autostart = true
 
 [node name="EnemySpawner" type="Node2D" parent="."]

@@ -18,6 +18,7 @@ var approach_angle = PI/3
 var rng = RandomNumberGenerator.new()
 
 func _ready():
+	rng.randomize()
 	var rotation_direction = bool(rng.randi_range(0, 2))
 	if rotation_direction:
 		approach_angle *= -1
@@ -54,7 +55,7 @@ func _on_area_2d_body_entered(body):
 func _on_despawn_timer_timeout():
 	var random_float = randf()
 	
-	if random_float > 0.8:
+	if random_float > 0.7:
 		item_manager.drop_random_item(position)
 	queue_free()
 

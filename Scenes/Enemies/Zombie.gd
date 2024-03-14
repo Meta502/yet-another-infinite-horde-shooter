@@ -41,6 +41,6 @@ func _on_area_2d_body_entered(body):
 func _on_despawn_timer_timeout():
 	var random_float = randf()
 
-	if random_float > 0.8:
+	if random_float > 0.7:
 		item_manager.drop_random_item(position)
 	queue_free()

@@ -82,5 +82,5 @@ func _on_pickup_item(id):
 	elif id == "shotgun":
 		if main.projectiles < 10:
 			main.projectiles += 1
-	elif id == "speed_up" and main.movement_speed < 450:
-		main.movement_speed *= 1.01
+	elif id == "speed_up" and main.movement_speed < 500:
+		main.movement_speed *= 1.035

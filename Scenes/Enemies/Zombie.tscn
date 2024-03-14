@@ -87,7 +87,7 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_n5lhw")
 
 [node name="DespawnTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 0.5
 
 [node name="Death" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_bhmd5")

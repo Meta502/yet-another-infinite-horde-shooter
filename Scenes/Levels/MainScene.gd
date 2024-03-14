@@ -48,7 +48,7 @@ func _ready():
 		weights_acc[i] = weights_sum
 
 func _physics_process(delta):
-	MAX_ENEMIES = (difficulty + 1) * 3
+	MAX_ENEMIES = pow(difficulty + 1, 1.5)
 	
 	$Camera2D/HUD/GameHUD/Health/Label.text = str(lives) + "/" + str(max_lives)
 	$Camera2D/HUD/GameHUD/Level/Label2.text = "Level: " + str(difficulty)

@@ -91,7 +91,6 @@ layer_1/tile_data = PackedInt32Array(-2031645, 1, 1, -2031644, 1, 1, -2031643, 1
 stream = ExtResource("7_jhfqt")
 volume_db = -12.0
 autoplay = true
-stream_paused = true
 
 [connection signal="mouse_entered" from="CanvasLayer/Control/CenterContainer" to="CanvasLayer/Control/CenterContainer" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Control/CenterContainer" to="CanvasLayer/Control/CenterContainer" method="_on_mouse_exited"]
