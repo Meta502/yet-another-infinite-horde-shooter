@@ -25,6 +25,9 @@ func _ready():
 	sprite_scale = $SpriteWrapper/AnimatedSprite2D.scale
 	$SpriteWrapper/AnimatedSprite2D.play("default")
 
+func play_hit_sound():
+	$Hit.play()
+
 func handle_input():
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and can_shoot:
 		var dir = get_global_mouse_position() - position

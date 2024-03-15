@@ -1,6 +1,7 @@
 extends Area2D
 
 @onready var main = get_node("/root/MainScene")
+@onready var player = get_node("/root/MainScene/CharacterController")
 
 var speed: float = 300
 var direction: Vector2
@@ -23,4 +24,5 @@ func _on_body_entered(body):
 		queue_free()
 	elif body.name == "CharacterController":
 		main.lives -= 1
+		player.play_hit_sound()
 		queue_free()

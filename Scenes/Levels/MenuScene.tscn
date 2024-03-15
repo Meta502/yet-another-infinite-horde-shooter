@@ -71,8 +71,7 @@ script = ExtResource("3_0ps5f")
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_xf0ak")
 theme_override_font_sizes/font_size = 32
-text = "Yet Another Infinite
-Horde Shooter"
+text = "FULL METAL SHOTGUN"
 horizontal_alignment = 1
 vertical_alignment = 1
 

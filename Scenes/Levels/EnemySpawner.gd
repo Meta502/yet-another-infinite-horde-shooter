@@ -12,6 +12,7 @@ signal hit_p
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	rng.randomize()
 	player = get_parent().get_node("CharacterController") 
 	
 func hit():

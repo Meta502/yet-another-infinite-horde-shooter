@@ -48,6 +48,7 @@ var inventory = {}
 var weights_acc := []
 
 func _ready():
+	rng.randomize()
 	weights_acc.resize(item_tables.size())
 	var weights_sum := 0.0
 	for i in weights_acc.size():

@@ -12,6 +12,7 @@ signal shoot_player
 var health: int
 var speed: int = 150
 var direction: Vector2 
+var sound_played: bool = false
 
 var approach_angle = PI/3
 
@@ -42,6 +43,9 @@ func _physics_process(delta):
 		
 func die():
 	$Area2D/CollisionShape2D.set_deferred("disabled", true)
+	if not $Death.playing and not sound_played:
+		sound_played = true
+		$Death.play()
 	if $DespawnTimer.is_stopped():
 		$DespawnTimer.start()
 	drop_item()

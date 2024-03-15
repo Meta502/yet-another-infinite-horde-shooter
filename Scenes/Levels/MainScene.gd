@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var MAX_ENEMIES = 20
+@onready var player = get_node("CharacterController")
 
 signal player_died
 
@@ -37,6 +38,7 @@ func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
 
 func _ready():
+	randomize()
 	lives = 3
 	movement_speed = 300
 	max_lives = 3
@@ -75,3 +77,4 @@ func _on_difficulty_timer_timeout():
 func _on_enemy_spawner_hit_p():
 	if lives > 0:
 		lives -= 1
+		player.play_hit_sound()
