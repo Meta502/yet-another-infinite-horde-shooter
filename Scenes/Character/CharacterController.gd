@@ -23,6 +23,8 @@ func _ready():
 	spawned = false
 	alive = true
 	sprite_scale = $SpriteWrapper/AnimatedSprite2D.scale
+	
+	$BGM.playing = not Settings.mute_bgm
 	$SpriteWrapper/AnimatedSprite2D.play("default")
 
 func play_hit_sound():
