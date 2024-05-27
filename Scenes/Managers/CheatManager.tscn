@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://co2gng6mrh4jj"]
+
+[ext_resource type="Script" path="res://Scenes/Managers/CheatManager.gd" id="1_3pbkl"]
+[ext_resource type="FontFile" uid="uid://d0xaakeq3uxy1" path="res://Resources/NinjaAdventure/HUD/Font/NormalFont.ttf" id="2_gwjpf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iju7s"]
+
+[node name="CheatManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3pbkl")
+
+[node name="DebounceTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Container" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_iju7s")
+
+[node name="LabelTimer" type="Timer" parent="CanvasLayer/Container"]
+wait_time = 2.0
+one_shot = true
+
+[node name="CheatLabel" type="Label" parent="CanvasLayer/Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gwjpf")
+horizontal_alignment = 1
+
+[connection signal="timeout" from="DebounceTimer" to="." method="_on_debounce_timer_timeout"]
+[connection signal="timeout" from="CanvasLayer/Container/LabelTimer" to="." method="_on_label_timer_timeout"]
