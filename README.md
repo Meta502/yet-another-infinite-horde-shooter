@@ -30,3 +30,14 @@ Implemented in the `uas` branch is a GitHub Actions CI/CD workflow that automati
 
 #### Justification
 Having an automated workflow that builds and uploads the release version of the game to an artifact can help make the release process easier, along with making it easier for the developers to identify failing builds/commits.
+
+### Add Mute BGM option
+#### Description
+Allow players to mute the game's BGM in the initial menu.
+
+#### Justification
+I recognize that some players might not want to listen to the BGM of the game but still want to have other SFX played to have feedback over what is happening in the game. This is why I think it is justified to have a feature to mute the in-game music.
+
+### Adjust SFX Volume Levels and Pitch Scale
+#### Justification
+Adjust the volume levels of the game's SFX as it was too loud (or too quiet) before. Also adjusted the pitch scale of the player hit SFX, shooting SFX, and mob death SFX as it is too high-pitched and fatigues the player after a while.
