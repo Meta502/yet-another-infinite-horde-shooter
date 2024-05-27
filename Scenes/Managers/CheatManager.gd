@@ -73,8 +73,7 @@ func _process(delta):
 	handle_cheat()
 
 
-func _on_debounce_timer_timeout():
-	current_cheat_string = ""
+func _on_debounce_timer_timeout():	current_cheat_string = ""
 
 
 func _on_label_timer_timeout():
