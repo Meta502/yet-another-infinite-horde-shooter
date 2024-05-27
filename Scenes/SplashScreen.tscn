@@ -1,0 +1,94 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccsm2se6t125v"]
+
+[ext_resource type="Script" path="res://Scenes/SplashScreen.gd" id="1_5u4lr"]
+[ext_resource type="FontFile" uid="uid://d0xaakeq3uxy1" path="res://Resources/NinjaAdventure/HUD/Font/NormalFont.ttf" id="2_7alpo"]
+[ext_resource type="Texture2D" uid="uid://b5moepguw04aa" path="res://Resources/logo_fasilkom.png" id="3_cmh5i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cx5ty"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dh7dv"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="SplashScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5u4lr")
+
+[node name="NameContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cx5ty")
+
+[node name="NameLabel" type="Label" parent="NameContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_7alpo")
+theme_override_font_sizes/font_size = 32
+text = "a game by ADRIAN ARDIZZA"
+
+[node name="MakaraContainer" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dh7dv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MakaraContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MakaraContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 175)
+layout_mode = 2
+texture = ExtResource("3_cmh5i")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="CreditsContainer" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dh7dv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="AttributionLabel" type="Label" parent="CreditsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_7alpo")
+theme_override_font_sizes/font_size = 32
+text = "ATTRIBUTIONS
+sci-fi character pack 12 - by PENUSBMIC
+ninja adventure by - PIXEL-BOY
+pixel art top down - basic - by CAINOS
+weapon pack - by VLAD PENN
+free effect bullet impact explosion 32x32
+by BDRAGON1727
+
+"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
