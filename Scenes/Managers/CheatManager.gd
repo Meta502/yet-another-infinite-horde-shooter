@@ -3,7 +3,7 @@ extends Control
 @onready var main = get_node("/root/MainScene")
 
 const CHEAT_LIST = {
-	"UUDDLRLRDU": ["KONAMI_CODE", "+5 MAX HEALTH, +2 SHOTGUN LEVEL, HEAL TO FULL"],
+	"UUDDLRLRDU": ["KONAMI_CODE", "+5 MAX HEALTH, +2 SHOTGUN LEVEL"],
 	"UUDDUUDD": ["I_AM_SPEED", "+10 SPEED UP"],
 	"LLLRRRLL": ["EAT_LEAD" , "+3 SHOTGUN LEVEL"]
 }
@@ -37,25 +37,34 @@ func handle_input():
 func handle_cheat():
 	var cheat = CHEAT_LIST.get(current_cheat_string)
 	if cheat:
-		if cheats_used.get(cheat[0]):
-			$CanvasLayer/Container/CheatLabel.text = cheat[0] + " ALREADY ACTIVATED"
-			$CanvasLayer/Container/LabelTimer.start()
-			current_cheat_string = ""
-			return
-		
-		$CanvasLayer/Container/CheatLabel.text = cheat[0] + " ACTIVATED\n" + cheat[1]
-		$CanvasLayer/Container/LabelTimer.start()
-		cheats_used[cheat[0]] = true
+		var deactivate = cheats_used.get(cheat[0])
+		cheats_used[cheat[0]] = !deactivate
 		
 		if cheat[0] == "KONAMI_CODE":
-			main.max_lives += 5
-			main.lives = main.max_lives
-			main.projectiles += 2
+			if deactivate:
+				main.max_lives -= 5
+				main.projectiles -= 2
+				main.lives = clamp(main.lives, 0, main.max_lives)
+			else:
+				main.max_lives += 5
+				main.lives = main.max_lives
+				main.projectiles += 2
 		if cheat[0] == "I_AM_SPEED":
-			main.movement_speed *= 1.035**10
+			if deactivate:
+				main.movement_speed /= 1.035**10
+			else:
+				main.movement_speed *= 1.035**10
 		if cheat[0] == "EAT_LEAD":
-			main.projectiles = clamp(main.projectiles + 3, 1, 10)
+			if deactivate:
+				main.projectiles -= 3
+			else:
+				main.projectiles += 3
 		
+		if deactivate:
+			$CanvasLayer/Container/CheatLabel.text = cheat[0] + " DEACTIVATED"
+		else:
+			$CanvasLayer/Container/CheatLabel.text = cheat[0] + " ACTIVATED\n" + cheat[1]
+		$CanvasLayer/Container/LabelTimer.start()
 		current_cheat_string = ""
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -65,7 +74,6 @@ func _process(delta):
 
 
 func _on_debounce_timer_timeout():
-	print("RESET CHEAT STRING")
 	current_cheat_string = ""
 
 
